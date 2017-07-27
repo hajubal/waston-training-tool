@@ -40,7 +40,7 @@ public class Application {
 		ExcelParser parser = new ExcelParser();
 		
 		try {
-			List<Utterance> utteranceList = parser.parse();
+			List<Utterance> utteranceList = parser.parseUtterance();
 			
 			for(Utterance item : utteranceList) {
 				//call api
