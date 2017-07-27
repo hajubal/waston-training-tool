@@ -1,11 +1,13 @@
 package com.bean;
 
+/**
+ * 말뭉치 bean
+ *
+ */
 public class Utterance {
 
 	private String intent;
 	private String utterance;
-	private double score;
-	private int vol;
 	
 	public String getIntent() {
 		return intent;
@@ -18,17 +20,5 @@ public class Utterance {
 	}
 	public void setUtterance(String utterance) {
 		this.utterance = utterance;
-	}
-	public double getScore() {
-		return score;
-	}
-	public void setScore(double score) {
-		this.score = score;
-	}
-	public int getVol() {
-		return vol;
-	}
-	public void setVol(int vol) {
-		this.vol = vol;
 	}
 }

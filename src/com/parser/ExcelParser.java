@@ -12,20 +12,42 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.bean.Utterance;
+import com.util.Logger;
+import com.util.PropertiesUtil;
 
+/**
+ * 대화뭉치 excel 파일 파서
+ * 
+ */
 public class ExcelParser {
 
 	public ExcelParser() {
 		
 	}
 	
+	/**
+	 * system.properties에 지정된 파일 파싱
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Utterance> parse() throws Exception {
+		return this.parse(PropertiesUtil.get("tool.filepath"));
+	}
 	
+	/**
+	 * 지정된 경로의 파일 파싱
+	 * 
+	 * @param filePath
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Utterance> parse(String filePath) throws Exception {
 		List<Utterance> utteranceList = new ArrayList<Utterance>();
 		
 		
 		if(this.isExist(filePath) == false)  {
-			System.out.println("File not found : " + filePath);
+			Logger.debug("Excel file not found : " + filePath);
 			
 			return utteranceList;
 		}
@@ -56,7 +78,7 @@ public class ExcelParser {
 				while(cells.hasNext()) {
 					cell = cells.next();
 					
-					System.out.println("row_" + rowIdx + ", cell_" + cellIdx++ + ": " + cell.getNumericCellValue());
+					Logger.debug("row_" + rowIdx + ", cell_" + cellIdx++ + ": " + cell.getNumericCellValue());
 					
 					//TODO create utterance object, list
 				}
