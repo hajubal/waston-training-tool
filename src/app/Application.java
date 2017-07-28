@@ -69,6 +69,7 @@ public class Application {
 		Logger.debug("Start test.");
 		
 		
+		
 		//TODO test data excel load
 		
 		//TODO loop: message send and result save
