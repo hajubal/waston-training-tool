@@ -6,7 +6,7 @@ import java.util.List;
  * test data bean
  *
  */
-public class TestData {
+public class TestUtterance {
 
 	private String intent;
 	private String utterance;

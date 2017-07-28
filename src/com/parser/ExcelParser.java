@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-import com.bean.TestData;
+import com.bean.TestUtterance;
 import com.bean.Utterance;
 import com.util.Logger;
 import com.util.PropertiesUtil;
@@ -94,7 +94,7 @@ public class ExcelParser {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TestData> parseTest() throws Exception {
+	public List<TestUtterance> parseTest() throws Exception {
 		return this.parseTest(PropertiesUtil.get("testdata.filepath"));
 	}
 	
@@ -105,8 +105,8 @@ public class ExcelParser {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TestData> parseTest(String filePath) throws Exception {
-		List<TestData> utteranceList = new ArrayList<TestData>();
+	public List<TestUtterance> parseTest(String filePath) throws Exception {
+		List<TestUtterance> utteranceList = new ArrayList<TestUtterance>();
 		
 		if(this.isExist(filePath) == false)  {
 			Logger.debug("Excel file not found : " + filePath);
