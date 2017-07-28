@@ -5,7 +5,7 @@ import java.util.List;
 import com.bean.Utterance;
 import com.parser.ExcelParser;
 import com.util.Logger;
-import com.util.MessageSendUtil;
+import com.util.ConversationUtil;
 
 /**
  * 
@@ -44,7 +44,7 @@ public class Application {
 			
 			for(Utterance item : utteranceList) {
 				//call api
-				MessageSendUtil.getInstance().createExample(item.getIntent(), item.getUtterance());
+				ConversationUtil.getInstance().createExample(item.getIntent(), item.getUtterance());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

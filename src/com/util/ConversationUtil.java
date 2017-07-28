@@ -17,15 +17,15 @@ import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
  * 
  *
  */
-public class MessageSendUtil {
+public class ConversationUtil {
 	
-	private static MessageSendUtil instance = new MessageSendUtil();
+	private static ConversationUtil instance = new ConversationUtil();
 	
 	private ConversationService service;
 	
 	private String workspaceId;
 	
-	private MessageSendUtil() {
+	private ConversationUtil() {
 		String userName = PropertiesUtil.get("service.user.name");
 		String password = PropertiesUtil.get("service.user.password");
 		
@@ -35,7 +35,7 @@ public class MessageSendUtil {
 	    service.setUsernameAndPassword(userName, password);
 	}
 	
-	public static MessageSendUtil getInstance() {
+	public static ConversationUtil getInstance() {
 		return instance;
 	}
 	
