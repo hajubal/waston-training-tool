@@ -3,8 +3,6 @@ package com.util;
 public class Logger {
 
 	
-	private static Logger logger = new Logger();
-	
 	private Logger() {
 		
 	}
