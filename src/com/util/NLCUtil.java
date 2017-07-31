@@ -1,8 +1,11 @@
 package com.util;
 
+import java.io.File;
+
 import com.ibm.watson.developer_cloud.http.ServiceCallback;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.NaturalLanguageClassifier;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classification;
+import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier;
 
 public class NLCUtil {
 	private static String userName = "6e210c1a-561c-4d85-924b-fcff71f6263f";
@@ -13,6 +16,7 @@ public class NLCUtil {
 
 	private NaturalLanguageClassifier service = new NaturalLanguageClassifier();
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private NLCUtil() {
 		this.service.setUsernameAndPassword(userName, password);
 		
@@ -21,13 +25,11 @@ public class NLCUtil {
 			@Override
 			public void onFailure(Exception arg0) {
 				//System.out.println(arg0);
-				
 			}
 
 			@Override
 			public void onResponse(Object arg0) {
 				//System.out.println(arg0);
-				
 			}
 		});
 	}
@@ -48,7 +50,20 @@ public class NLCUtil {
 		return classification;
 	}
 	
-	public void training() {
+	/**
+	 * training
+	 * 
+	 * @return
+	 */
+	public Classifier training() {
+		String filePath = PropertiesUtil.get("trainingdata.filepath");
 		
+		//training csv file
+		File file = new File(filePath);
+		
+		
+		Classifier classifier = this.service.createClassifier(classifierId, "kr", file).execute();
+		
+		return classifier;
 	}
 }

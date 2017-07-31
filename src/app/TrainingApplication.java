@@ -1,33 +1,35 @@
 package app;
 
-import java.util.List;
-
-import com.bean.Utterance;
-import com.parser.ExcelParser;
 import com.util.Logger;
-import com.util.ConversationUtil;
 
 /**
  * 
- * 실행 프로그램
+ * 프레이닝 프로그램
  *
  */
-public class Application {
+public class TrainingApplication {
 
 	public static void main(String[] args) throws Exception {
 		
 		Logger.debug("Start application.");
 		
-		Application app = new Application();
+		TrainingApplication app = new TrainingApplication();
 		
+		/**
+		 * NLC 서비스에 대화 트레이닝
+		 */
 		boolean isSuccess = app.training();
 		
+		/**
+		 * NLC 서비스 테스트
+		 */
 		if(isSuccess) {
 			app.test();
 		}
 		
 		Logger.debug("End application.");
 	}
+	
 	
 	/**
 	 * excel data를 이용한 training
@@ -37,23 +39,7 @@ public class Application {
 	public boolean training() {
 		Logger.debug("Start training.");
 		
-		ExcelParser parser = new ExcelParser();
 		
-		try {
-			List<Utterance> utteranceList = parser.parseUtterance();
-			
-			for(Utterance item : utteranceList) {
-				//call api
-				ConversationUtil.getInstance().createExample(item.getIntent(), item.getUtterance());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-			Logger.error("Training Failure.");
-			
-			
-			return false;
-		}
 		
 		Logger.debug("Success training.");
 		
