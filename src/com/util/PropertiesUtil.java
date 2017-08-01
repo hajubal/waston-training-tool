@@ -14,8 +14,7 @@ public class PropertiesUtil {
 		try {
 			prop.load(PropertiesUtil.class.getClassLoader().getResourceAsStream(SYSTEM_PROPERTIES_PATH));
 		} catch (IOException e) {
-			Logger.error("system.properties load error.");
-			e.printStackTrace();
+			Logger.error("system.properties load error.", e);
 		}
 	}
 	

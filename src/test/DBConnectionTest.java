@@ -93,6 +93,13 @@ public class DBConnectionTest {
 
 	}
 
+	/**
+	 * database 생성
+	 * 
+	 * @param client
+	 * @param dbname
+	 * @return
+	 */
 	public JsonObject createData(CloudantClient client, String dbname) {
 
 		// Create a dummy json document
@@ -127,6 +134,14 @@ public class DBConnectionTest {
 		return "ID#" + new Double(Math.floor(Math.random() * 10000)).intValue();
 	}
 
+	/**
+	 * database내에 모든 데이터 조회
+	 * 
+	 * @param client
+	 * @param dbname
+	 * @return
+	 * @throws Exception
+	 */
 	public JsonObject getAll(CloudantClient client, String dbname) throws Exception {
 		JsonObject output = new JsonObject();
 
@@ -149,6 +164,15 @@ public class DBConnectionTest {
 		return output;
 	}
 
+	/**
+	 * 데이터 조회
+	 * 
+	 * @param client
+	 * @param dbname
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public JsonObject getDocument(CloudantClient client, String dbname, String id) throws Exception {
 		JsonObject output = new JsonObject();
 
@@ -175,6 +199,17 @@ public class DBConnectionTest {
 		return output;
 	}
 
+	/**
+	 * 데이터 수정
+	 * 
+	 * @param client
+	 * @param dbname
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @return
+	 * @throws Exception
+	 */
 	public JsonObject updateDocument(CloudantClient client, String dbname, String id, String firstName, String lastName)
 			throws Exception {
 		JsonObject output = new JsonObject();
@@ -222,6 +257,15 @@ public class DBConnectionTest {
 		return output;
 	}
 	
+	/**
+	 * 데이터 삭제
+	 * 
+	 * @param client
+	 * @param dbname
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	public JsonObject deleteDocument(CloudantClient client, String dbname, String id) throws Exception {
 		JsonObject output = new JsonObject();
 		

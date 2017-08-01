@@ -1,6 +1,7 @@
 package com.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,10 @@ public class ConversationUtil {
 	private String workspaceId;
 	
 	private ConversationUtil() {
-		String userName = PropertiesUtil.get("service.user.name");
-		String password = PropertiesUtil.get("service.user.password");
+		String userName = PropertiesUtil.get("conversation.service.user.name");
+		String password = PropertiesUtil.get("conversation.service.user.password");
 		
-		this.workspaceId = PropertiesUtil.get("workspace.id");
+		this.workspaceId = PropertiesUtil.get("conversation.workspace.id");
 		
 	    service = new ConversationService(ConversationService.VERSION_DATE_2017_02_03);
 	    service.setUsernameAndPassword(userName, password);
@@ -37,6 +38,10 @@ public class ConversationUtil {
 	
 	public static ConversationUtil getInstance() {
 		return instance;
+	}
+	
+	public MessageResponse sendMessage(String message) {
+		return this.sendMessage(null, message);
 	}
 	
 	/**
@@ -47,9 +52,15 @@ public class ConversationUtil {
 	 * @return
 	 */
 	public MessageResponse sendMessage(Map<String, Object> context, String message) {
+		if(context == null) {
+			context = new HashMap<String, Object>();
+		}
+		
 		MessageRequest newMessage = new MessageRequest.Builder().context(context).inputText(message).build();
 		 
 		MessageResponse response = this.service.message(this.workspaceId, newMessage).execute();
+		
+		Logger.debug(response.toString());
 		
 		return response;
 	}
@@ -74,6 +85,8 @@ public class ConversationUtil {
 		}
 		
 		IntentResponse response = this.service.createIntent(this.workspaceId, intent, description, list).execute();
+		
+		Logger.debug(response.toString());
 		
 		return response;
 	}
@@ -100,6 +113,8 @@ public class ConversationUtil {
 		
 		IntentResponse response = this.service.updateIntent(this.workspaceId, intent, newIntent, newDescription, list).execute();
 		
+		Logger.debug(response.toString());
+		
 		return response;
 	}
 	
@@ -113,6 +128,8 @@ public class ConversationUtil {
 	public ExampleResponse createExample(String intent, String exampleText) {
 		
 		ExampleResponse response = this.service.createExample(this.workspaceId, intent, exampleText).execute(); 
+		
+		Logger.debug(response.toString());
 		
 		return response;
 	}

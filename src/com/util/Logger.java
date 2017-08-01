@@ -14,4 +14,10 @@ public class Logger {
 	public static void error(String msg) {
 		System.out.println(msg);
 	}
+	
+	public static void error(String msg, Exception e) {
+		e.printStackTrace();
+		
+		System.out.println(msg);
+	}
 }
