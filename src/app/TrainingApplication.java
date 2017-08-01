@@ -1,12 +1,7 @@
 package app;
 
-import com.cloudant.client.api.Database;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classification;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier.Status;
-import com.util.DBUtil;
 import com.util.Logger;
 import com.util.NLCUtil;
 
