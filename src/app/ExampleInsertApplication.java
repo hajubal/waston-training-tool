@@ -2,11 +2,12 @@ package app;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.bean.Utterance;
 import com.parser.ExampleExcelParser;
 import com.parser.ExcelParser;
 import com.util.ConversationUtil;
-import com.util.Logger;
 
 /**
  * 
@@ -14,10 +15,12 @@ import com.util.Logger;
  *
  */
 public class ExampleInsertApplication {
+	
+	final static Logger log = Logger.getLogger(ExampleInsertApplication.class);
 
 	public static void main(String[] args) throws Exception {
 		
-		Logger.debug("Start application.");
+		log.debug("Start application.");
 		
 		ExampleInsertApplication app = new ExampleInsertApplication();
 		
@@ -26,12 +29,7 @@ public class ExampleInsertApplication {
 		 */
 		app.createExampleData();
 		
-		//ConversationUtil.getInstance().createExample("Reservation", "하루묵어줍소!!!!!!.");
-		
-		//ConversationUtil.getInstance().sendMessage("방");
-		
-		
-		Logger.debug("End application.");
+		log.debug("End application.");
 	}
 	
 	/**
@@ -41,7 +39,7 @@ public class ExampleInsertApplication {
 	 * @return
 	 */
 	public boolean createExampleData() {
-		Logger.debug("Start create example.");
+		log.debug("Start create example.");
 		
 		ExcelParser parser = new ExampleExcelParser();
 		
@@ -54,12 +52,12 @@ public class ExampleInsertApplication {
 			}
 		} catch (Exception e) {
 			
-			Logger.error("Training Failure.", e);
+			log.error("Training Failure.", e);
 			
 			return false;
 		}
 		
-		Logger.debug("Success create example.");
+		log.debug("Success create example.");
 		
 		return true;
 	}

@@ -3,11 +3,14 @@ package com.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
+
 import com.cloudant.client.api.ClientBuilder;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 
 public class DBUtil {
+	final static Logger log = Logger.getLogger(DBUtil.class);
 	
 	private static final String DB_NAME = "test_history";
 
@@ -23,6 +26,7 @@ public class DBUtil {
 		try {
 			client = ClientBuilder.url(new URL(url)).username(userName).password(password).build();
 		} catch (MalformedURLException e) {
+			log.error(e);
 			throw new RuntimeException();
 		}
 	}

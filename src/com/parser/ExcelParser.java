@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,13 +13,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.bean.Utterance;
-import com.util.Logger;
 
 /**
  * excel 파일 파서
  * 
  */
 public abstract class ExcelParser {
+	final static Logger log = Logger.getLogger(ExcelParser.class);
 
 	public ExcelParser() {
 		
@@ -45,7 +46,7 @@ public abstract class ExcelParser {
 		List<Utterance> utteranceList = new ArrayList<Utterance>();
 		
 		if(file == null || file.exists() == false)  {
-			Logger.debug("Excel file not found.");
+			log.debug("Excel file not found.");
 			
 			return utteranceList;
 		}
@@ -76,7 +77,7 @@ public abstract class ExcelParser {
 				while(cells.hasNext()) {
 					cell = cells.next();
 					
-					Logger.debug("row_" + rowIdx + ", cell_" + cellIdx + ": " + cell.getNumericCellValue());
+					log.debug("row_" + rowIdx + ", cell_" + cellIdx + ": " + cell.getNumericCellValue());
 					
 					utteranceList.add(this.getUtterance(rowIdx, cellIdx, cell));
 					

@@ -3,7 +3,11 @@ package com.util;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class PropertiesUtil {
+	final static Logger log = Logger.getLogger(PropertiesUtil.class);
+	
 	private Properties prop = new Properties();
 	
 	private static PropertiesUtil util = new PropertiesUtil();
@@ -14,7 +18,7 @@ public class PropertiesUtil {
 		try {
 			prop.load(PropertiesUtil.class.getClassLoader().getResourceAsStream(SYSTEM_PROPERTIES_PATH));
 		} catch (IOException e) {
-			Logger.error("system.properties load error.", e);
+			log.error("system.properties load error.", e);
 		}
 	}
 	

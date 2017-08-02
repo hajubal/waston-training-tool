@@ -4,14 +4,15 @@ import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 
-import com.cloudant.client.api.Database;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.apache.log4j.Logger;
+
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.NaturalLanguageClassifier;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classification;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier;
 
 public class NLCUtil {
+	final static Logger log = Logger.getLogger(NLCUtil.class);
+	
 	private static String NAME_PREFIX = "Training_";
 	
 	private static NLCUtil instance = new NLCUtil();
@@ -69,7 +70,7 @@ public class NLCUtil {
 		
 		Classification classification = this.service.classify(classifierId, message).execute();
 		
-		Logger.debug(classification.toString());
+		log.debug(classification.toString());
 		
 		return classification;
 	}
@@ -84,7 +85,7 @@ public class NLCUtil {
 		
 		Classifier classifier = this.service.getClassifier(classifierId).execute();
 		
-		Logger.debug(classifier.toString());
+		log.debug(classifier.toString());
 		
 		return classifier;
 	}
@@ -112,13 +113,13 @@ public class NLCUtil {
 	public Classifier training(File file) {
 		
 		if(file.exists() == false) {
-			Logger.error("Training data is null");
+			log.error("Training data is null");
 			return null;
 		}
 		
 		Classifier classifier = this.service.createClassifier(this.generateName(), "ko", file).execute();
 		
-		Logger.debug(classifier.toString());
+		log.debug(classifier.toString());
 		
 		return classifier;
 	}
@@ -163,7 +164,7 @@ public class NLCUtil {
 	public List<Classifier> getAllClassifier() {
 		List<Classifier> list = this.service.getClassifiers().execute().getClassifiers();
 		
-		Logger.debug(list.toString());
+		log.debug(list.toString());
 		
 		return list; 
 	}

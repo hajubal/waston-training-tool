@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
 import com.ibm.watson.developer_cloud.conversation.v1.model.CreateExample;
 import com.ibm.watson.developer_cloud.conversation.v1.model.CreateExample.Builder;
@@ -19,6 +21,7 @@ import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
  *
  */
 public class ConversationUtil {
+	final static Logger log = Logger.getLogger(ConversationUtil.class);
 	
 	private static ConversationUtil instance = new ConversationUtil();
 	
@@ -60,7 +63,7 @@ public class ConversationUtil {
 		 
 		MessageResponse response = this.service.message(this.workspaceId, newMessage).execute();
 		
-		Logger.debug(response.toString());
+		log.debug(response.toString());
 		
 		return response;
 	}
@@ -86,7 +89,7 @@ public class ConversationUtil {
 		
 		IntentResponse response = this.service.createIntent(this.workspaceId, intent, description, list).execute();
 		
-		Logger.debug(response.toString());
+		log.debug(response.toString());
 		
 		return response;
 	}
@@ -113,7 +116,7 @@ public class ConversationUtil {
 		
 		IntentResponse response = this.service.updateIntent(this.workspaceId, intent, newIntent, newDescription, list).execute();
 		
-		Logger.debug(response.toString());
+		log.debug(response.toString());
 		
 		return response;
 	}
@@ -129,7 +132,7 @@ public class ConversationUtil {
 		
 		ExampleResponse response = this.service.createExample(this.workspaceId, intent, exampleText).execute(); 
 		
-		Logger.debug(response.toString());
+		log.debug(response.toString());
 		
 		return response;
 	}
@@ -141,5 +144,9 @@ public class ConversationUtil {
 	 */
 	public ConversationService getConversationService() {
 		return this.service;
+	}
+	
+	public static void main(String[] a) {
+		ConversationUtil.getInstance().sendMessage("남아 있는지?");
 	}
 }

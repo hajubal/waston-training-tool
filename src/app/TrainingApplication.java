@@ -1,8 +1,9 @@
 package app;
 
+import org.apache.log4j.Logger;
+
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifier.Status;
-import com.util.Logger;
 import com.util.NLCUtil;
 
 /**
@@ -11,10 +12,12 @@ import com.util.NLCUtil;
  *
  */
 public class TrainingApplication {
+	
+	final static Logger log = Logger.getLogger(TrainingApplication.class);
 
 	public static void main(String[] args) throws Exception {
 		
-		Logger.debug("Start application.");
+		log.debug("Start application.");
 		
 		TrainingApplication app = new TrainingApplication();
 		
@@ -30,7 +33,7 @@ public class TrainingApplication {
 			app.test();
 		}
 		
-		Logger.debug("End application.");
+		log.debug("End application.");
 	}
 	
 	
@@ -41,12 +44,12 @@ public class TrainingApplication {
 	 * @throws InterruptedException 
 	 */
 	public boolean training() throws InterruptedException {
-		Logger.debug("Start training.");
+		log.debug("Start training.");
 		
 		Classifier classifier = NLCUtil.getInstance().training();
 		
 		if(classifier == null) {
-			Logger.error("Fail to training.");
+			log.error("Fail to training.");
 			return false;
 		}
 		
@@ -60,12 +63,12 @@ public class TrainingApplication {
 				isEndTraining = true;
 			}
 			
-			Logger.debug("Waiting for training.....");
+			log.debug("Waiting for training.....");
 			
 			Thread.sleep(1000 * 30 * 1); //30 sec
 		}
 		
-		Logger.debug("Success training.");
+		log.debug("Success training.");
 		
 		return true;
 	}
@@ -76,7 +79,7 @@ public class TrainingApplication {
 	 * @throws Exception
 	 */
 	public void test() throws Exception {
-		Logger.debug("Start test.");
+		log.debug("Start test.");
 		
 		//TODO test data excel load
 		
@@ -91,7 +94,7 @@ public class TrainingApplication {
 //		database.save(object);
 		
 		
-		Logger.debug("Success test.");
+		log.debug("Success test.");
 	}
 	
 	
